@@ -7,12 +7,12 @@ public class PlayerWorldBorderData {
     private double centerX;
     private double centerZ;
     private double size;
-    private double damageAmount;
-    private double damageBuffer;
-    private double warningDistance;
-    private double warningTime;
+    private float damageAmount;
+    private float damageBuffer;
+    private Integer warningDistance;
+    private float warningTime;
     private double distance;
-    private double addDistanceTime;
+    private float addDistanceTime;
 
     /**
      * Set the center of the player world border
@@ -57,7 +57,7 @@ public class PlayerWorldBorderData {
      *
      * @param newDamageAmount The amount of damage players receive per second when outside the world border buffer zone
      */
-    public void setPlayerDamageAmount(double newDamageAmount) {
+    public void setPlayerDamageAmount(float newDamageAmount) {
         this.damageAmount = newDamageAmount;
     }
 
@@ -75,7 +75,7 @@ public class PlayerWorldBorderData {
      *
      * @param newDamageBuffer A safe buffer distance where players remain unharmed even after crossing the world border
      */
-    public void setPlayerDamageBuffer(double newDamageBuffer) {
+    public void setPlayerDamageBuffer(float newDamageBuffer) {
         this.damageBuffer = newDamageBuffer;
     }
 
@@ -93,7 +93,7 @@ public class PlayerWorldBorderData {
      *
      * @param newWarningDistance Distance approaching the world border warning
      */
-    public void setPlayerWarningDistance(double newWarningDistance) {
+    public void setPlayerWarningDistance(Integer newWarningDistance) {
         this.warningDistance = newWarningDistance;
     }
 
@@ -111,7 +111,7 @@ public class PlayerWorldBorderData {
      *
      * @param newWarningTime The time for the world border proximity warning
      */
-    public void setPlayerWarningTime(double newWarningTime) {
+    public void setPlayerWarningTime(float newWarningTime) {
         this.warningTime = newWarningTime;
     }
 
@@ -157,7 +157,7 @@ public class PlayerWorldBorderData {
      *
      * @param newAddDistanceTime The duration of time for the transition of the player world border from old border to new border
      */
-    public void setPlayerAddDistanceTime(double newAddDistanceTime) {
+    public void setPlayerAddDistanceTime(float newAddDistanceTime) {
         this.addDistanceTime = newAddDistanceTime;
     }
 
