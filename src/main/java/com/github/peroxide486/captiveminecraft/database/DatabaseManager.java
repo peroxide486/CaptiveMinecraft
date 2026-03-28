@@ -57,9 +57,25 @@ public class DatabaseManager {
 
     private static String getCreateTableSql() {
         if (Objects.equals(plugin.getConfig().getString("database.type"), "mysql")) {
-            return "";
+            return "CREATE TABLE IF NOT EXISTS players (" +
+                    "id BIGINT AUTO_INCREMENT PRIMARY KEY," +
+                    "player_name VARCHAR(50) NOT NULL," +
+                    "player_uuid CHAR(36) NOT NULL UNIQUE," +
+                    "x DOUBLE NOT NULL," +
+                    "z DOUBLE NOT NULL," +
+                    "total_size BIGINT NOT NULL," +
+                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                    ")";
         } else if (Objects.equals(plugin.getConfig().getString("database.type"), "sqlite")) {
-            return "";
+            return "CREATE TABLE IF NOT EXISTS players (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "player_name TEXT NOT NULL," +
+                    "player_uuid TEXT NOT NULL UNIQUE," +
+                    "x REAL NOT NULL," +
+                    "z REAL NOT NULL," +
+                    "total_size INTEGER NOT NULL," +
+                    "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
+                    ")";
         } else {
             plugin.getLogger().warning("Database type not supported! Disable plugin!");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
