@@ -1,0 +1,16 @@
+# mysql or sqlite
+database:
+  type: "sqlite"
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "minecraft"
+    username: "root"
+    password: "joob383"
+    maximumPoolSize: 10
+    connectionOptions: "?useSSL=false&serverTimezone=UTC"
+  sqlite:
+    file: "plugins/CaptiveMinecraft/WorldBorderData.db"
+
+# Please do not modify it yourself!
+config-version: 0.1

@@ -2,3 +2,9 @@ name: CaptiveMinecraft
 version: '0.1.0'
 main: com.github.peroxide486.captiveminecraft.CaptiveMinecraft
 api-version: '1.21.11'
+author: peroxide486
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
