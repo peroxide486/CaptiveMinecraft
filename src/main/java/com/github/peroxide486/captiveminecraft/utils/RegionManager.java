@@ -40,13 +40,17 @@ public class RegionManager {
 
     }
 
-    public Regions assignNewRegion(Player player) {
+    public synchronized Regions assignNewRegion(Player player) {
+        UUID uuid = player.getUniqueId();
+        if (playerRegions.containsKey(uuid)) {
+            return playerRegions.get(uuid);
+        }
+
         int[] nextCoord = getNextFreeRegion();
         int regionX = nextCoord[0];
         int regionZ = nextCoord[1];
         Regions newRegion = new Regions(regionX, regionZ);
 
-        UUID uuid = player.getUniqueId();
         playerRegions.put(uuid, newRegion);
         allocatedRegions.add(regionX + "," + regionZ);
 
@@ -58,7 +62,7 @@ public class RegionManager {
         return newRegion;
     }
 
-    public Regions getPlayerRegion(Player player) {
+    public synchronized Regions getPlayerRegion(Player player) {
         return playerRegions.get(player.getUniqueId());
     }
 

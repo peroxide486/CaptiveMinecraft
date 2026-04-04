@@ -1,5 +1,6 @@
 package com.github.peroxide486.captiveminecraft;
 
+import com.github.peroxide486.captiveminecraft.listeners.PlayerRegionalismEvent;
 import com.github.peroxide486.captiveminecraft.utils.RegionManager;
 import com.github.peroxide486.captiveminecraft.utils.database.DatabaseManager;
 import com.github.peroxide486.captiveminecraft.utils.database.DatabaseManagerFactory;
@@ -34,6 +35,8 @@ public class CaptiveMinecraft extends JavaPlugin {
 
         storageService = new StorageService(databaseManager.getJdbi());
         regionManager = new RegionManager(this, storageService);
+
+        getServer().getPluginManager().registerEvents(new PlayerRegionalismEvent(this, regionManager), this);
 
         getLogger().info("CaptiveMinecraft Enabled!");
     }
