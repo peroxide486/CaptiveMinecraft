@@ -127,15 +127,14 @@ public class RegionManager {
         return new RegionBorder(world, minX, maxX, minZ, maxZ);
     }
 
-//    public boolean isInPlayerRegion(Player player, Location location) {
-//        Regions region = getPlayerRegion(player);
-//        if (region == null) {
-//            return false;
-//        }
-//        double borderSize = region.getRegionSize();
-//        RegionBorder border = getRegionBorder(region, location.getWorld(), borderSize);
-//        return border.contains(location);
-//    }
+    public boolean isInPlayerRegion(Player player, Location location) {
+        Regions region = getPlayerRegion(player);
+        if (region == null) {
+            return false;
+        }
+        RegionBorder border = getRegionBorder(region, location.getWorld());
+        return border.contains(location);
+    }
 
     public Location getRegionCenter(Regions region, World world) {
         int centerX = region.getRegionX() * REGION_SIZE + REGION_SIZE / 2;
