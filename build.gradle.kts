@@ -47,4 +47,5 @@ paperweight {
 
 tasks.withType<ShadowJar> {
     relocate("com.github.yannicklamprecht.worldborder", "com.github.peroxide486.captiveminecraft.worldborderapi")
+    relocate("org.jdbi.v3", "com.github.peroxide486.captiveminecraft.jdbi.v3")
 }
