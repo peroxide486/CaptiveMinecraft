@@ -1,29 +1,43 @@
 package com.github.peroxide486.captiveminecraft;
 
-import com.github.peroxide486.captiveminecraft.database.DatabaseManager;
-import com.github.peroxide486.captiveminecraft.listeners.RegisterPlayerBorderEvent;
+import com.github.peroxide486.captiveminecraft.utils.database.DatabaseManager;
+import com.github.peroxide486.captiveminecraft.utils.database.DatabaseManagerFactory;
+import com.github.yannicklamprecht.worldborder.api.WorldBorderApi;
+import com.sk89q.worldguard.WorldGuard;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.SQLException;
 
 public class CaptiveMinecraft extends JavaPlugin {
-    private CaptiveMinecraft plugin;
+    private WorldBorderApi worldBorderAPI;
+    private WorldGuard worldGuardAPI;
+    private DatabaseManager databaseManager;
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        try {
-            DatabaseManager.init();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        RegisteredServiceProvider<WorldBorderApi> worldBorderAPIRegisteredServiceProvider = getServer().getServicesManager().getRegistration(WorldBorderApi.class);
+
+        if (worldBorderAPIRegisteredServiceProvider == null) {
+            getLogger().info("WorldBorderApi not found");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
         }
-        getServer().getPluginManager().registerEvents(new RegisterPlayerBorderEvent(), this);
+
+        worldGuardAPI = WorldGuard.getInstance();
+        worldBorderAPI = worldBorderAPIRegisteredServiceProvider.getProvider();
+        databaseManager = DatabaseManagerFactory.createDatabaseManager(this);
+
+        databaseManager.initializeTables();
+
         getLogger().info("CaptiveMinecraft Enabled!");
     }
 
     @Override
     public void onDisable() {
-        DatabaseManager.close();
+        if (databaseManager != null) {
+            databaseManager.close();
+        }
+
         getLogger().info("CaptiveMinecraft Disabled!");
     }
 }
