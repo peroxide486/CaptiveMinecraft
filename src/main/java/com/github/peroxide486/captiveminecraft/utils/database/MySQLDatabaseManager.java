@@ -35,7 +35,8 @@ public class MySQLDatabaseManager implements DatabaseManager {
         String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConstants.TABLE_NAME + " (" +
                 DatabaseConstants.COL_UUID + " VARCHAR(36) PRIMARY KEY, " +
                 DatabaseConstants.COL_REGION_X + " INT NOT NULL, " +
-                DatabaseConstants.COL_REGION_Z + " INT NOT NULL) " +
+                DatabaseConstants.COL_REGION_Z + " INT NOT NULL, " +
+                DatabaseConstants.COL_REGION_SIZE + " DOUBLE NOT NULL) " +
                 "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
         jdbi.useHandle(handle -> handle.execute(sql));
     }

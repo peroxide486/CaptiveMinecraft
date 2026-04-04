@@ -1,9 +1,11 @@
 package com.github.peroxide486.captiveminecraft;
 
+import com.github.peroxide486.captiveminecraft.commands.BorderChangeCommand;
 import com.github.peroxide486.captiveminecraft.listeners.PlayerRegionalismEvent;
 import com.github.peroxide486.captiveminecraft.utils.RegionManager;
 import com.github.peroxide486.captiveminecraft.utils.database.DatabaseManager;
 import com.github.peroxide486.captiveminecraft.utils.database.DatabaseManagerFactory;
+import com.github.peroxide486.captiveminecraft.utils.database.RegionSQL;
 import com.github.peroxide486.captiveminecraft.utils.database.StorageService;
 import com.github.yannicklamprecht.worldborder.api.WorldBorderApi;
 import com.sk89q.worldguard.WorldGuard;
@@ -17,6 +19,8 @@ public class CaptiveMinecraft extends JavaPlugin {
     private DatabaseManager databaseManager;
     private StorageService storageService;
     private RegionManager regionManager;
+    private RegionSQL regionSQL;
+    private BorderChangeCommand borderChangeCommand;
 
     @Override
     public void onEnable() {
@@ -34,9 +38,14 @@ public class CaptiveMinecraft extends JavaPlugin {
         databaseManager.initializeTables();
 
         storageService = new StorageService(databaseManager.getJdbi());
-        regionManager = new RegionManager(this, storageService);
+        regionManager = new RegionManager(this, storageService, worldBorderAPI, regionSQL);
 
         getServer().getPluginManager().registerEvents(new PlayerRegionalismEvent(this, regionManager), this);
+        try {
+            getCommand("").setExecutor(borderChangeCommand);
+        } catch (NullPointerException e) {
+            getLogger().warning("There is a problem with command registration" + e.getMessage());
+        }
 
         getLogger().info("CaptiveMinecraft Enabled!");
     }

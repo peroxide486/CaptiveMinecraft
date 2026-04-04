@@ -13,7 +13,7 @@ public class SQLiteDatabaseManager implements DatabaseManager {
 
     public SQLiteDatabaseManager(File dataFolder, String fileName) {
         File dbFile = new File(dataFolder, fileName);
-        String jdbcUrl = "jdbc:sqlite:" + fileName;
+        String jdbcUrl = "jdbc:sqlite:" + dbFile.getAbsolutePath();
 
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(jdbcUrl);
@@ -37,7 +37,8 @@ public class SQLiteDatabaseManager implements DatabaseManager {
         String sql = "CREATE TABLE IF NOT EXISTS " + DatabaseConstants.TABLE_NAME + " (" +
                 DatabaseConstants.COL_UUID + " VARCHAR(36) PRIMARY KEY, " +
                 DatabaseConstants.COL_REGION_X + " INT NOT NULL, " +
-                DatabaseConstants.COL_REGION_Z + " INT NOT NULL)";
+                DatabaseConstants.COL_REGION_Z + " INT NOT NULL, " +
+                DatabaseConstants.COL_REGION_SIZE + " DOUBLE NOT NULL)";
         jdbi.useHandle(handle -> handle.execute(sql));
     }
 

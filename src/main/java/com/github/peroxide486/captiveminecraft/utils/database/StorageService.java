@@ -16,8 +16,8 @@ public class StorageService {
         regionSQL.createTable();
     }
 
-    public void saveRegion(UUID uuid, Regions regions) {
-        regionSQL.upsertRegion(uuid, regions.getRegionX(), regions.getRegionZ());
+    public void saveRegion(UUID uuid, Regions regions, double borderSize) {
+        regionSQL.upsertRegion(uuid, regions.getRegionX(), regions.getRegionZ(), borderSize);
     }
 
     public Regions loadRegion(UUID uuid) {
@@ -25,7 +25,7 @@ public class StorageService {
     }
 
     public Map<UUID, Regions> loadAllRegions() {
-        List<Regions> regions = regionSQL.getAllPlots();
+        List<Regions> regions = regionSQL.getAllRegions();
         Map<UUID, Regions> map = new HashMap<>();
         for (Regions region : regions) {
             map.put(region.getUUID(), new Regions(region.getRegionX(), region.getRegionZ()));

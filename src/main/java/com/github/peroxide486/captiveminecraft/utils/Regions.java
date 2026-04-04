@@ -6,11 +6,19 @@ public class Regions {
     private UUID uuid;
     private int regionX;
     private int regionZ;
+    private double regionSize;
     
     public Regions() {
 
     }
-    
+
+    public Regions(UUID uuid, int regionX, int regionZ, double regionSize) {
+        this.uuid = uuid;
+        this.regionX = regionX;
+        this.regionZ = regionZ;
+        this.regionSize = regionSize;
+    }
+
     public Regions(UUID uuid, int regionX, int regionZ) {
         this.uuid = uuid;
         this.regionX = regionX;
@@ -41,5 +49,12 @@ public class Regions {
     }
     public void setRegionZ(int regionZ) {
         this.regionZ = regionZ;
+    }
+
+    public double getRegionSize() {
+        return regionSize;
+    }
+    public void setRegionSize(double regionSize) {
+        this.regionSize = regionSize;
     }
 }
