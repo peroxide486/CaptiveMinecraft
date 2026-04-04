@@ -1,0 +1,33 @@
+name: "Bug"
+description: "Report issues encountered during the operation of the plugin."
+title: "[Bug] "
+labels:
+  - "bug"
+
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Problem Overview
+      description: Briefly describe the issue with the plugin
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Start the server ...
+        2. Some issues have arisen ...
+        3. shut down the server ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Other information
+      description: Logs, screenshots, environmental information, etc. The more detailed, the better.
+    validations:
+      required: false

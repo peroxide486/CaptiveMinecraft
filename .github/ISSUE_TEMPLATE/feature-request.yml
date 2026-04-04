@@ -1,0 +1,21 @@
+name: "Feature"
+description: "Used for submitting new functional requirements or changes to existing requirements"
+title: "[Feature] "
+labels:
+  - "feature"
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting a new request 🙏.
+        Please fill in as clearly as possible to facilitate evaluation and scheduling.
+        Pay attention to the topics you have posted to avoid missing any replies.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Requirement description
+      description: Try to articulate your request as straightforwardly and in detail as possible
+      validations:
+        required: true
